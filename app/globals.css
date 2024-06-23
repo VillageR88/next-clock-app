@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+  @apply font-antonio xl:text-[80px] text-[48px] font-medium text-white;
+}
+
+h2 {
+  @apply font-antonio text-[24px] font-medium tracking-[-0.9px] text-white xl:text-[40px] xl:tracking-[-1.5px];
+}
+h3 {
+  @apply font-leagueSpartan xl:text-[12px] text-[11px] font-bold tracking-[1px] text-white;
+}
+h4 {
+  @apply font-leagueSpartan text-[13px] font-semibold leading-[25px] tracking-[1.3px] text-white;
+}
+
+p {
+  @apply font-leagueSpartan text-[14px] font-normal leading-[25px] text-white;
+}
