@@ -2,7 +2,7 @@
 
 import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from 'react';
 import { Location } from '@/app/_lib/interfaces';
-import { getLocationData } from '@/app/_lib/functionsServer';
+import { getLocationData } from '@/app/_lib/functionsClient';
 export const DataContext = createContext(
   {} as {
     date: Date;
@@ -17,6 +17,7 @@ export default function DataProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<Location | null>(null);
 
   useEffect(() => {
+    if (location) return;
     getLocationData()
       .then((data) => {
         setLocation(data);
@@ -24,7 +25,7 @@ export default function DataProvider({ children }: { children: ReactNode }) {
       .catch((error: unknown) => {
         console.error('Error:', error);
       });
-  }, []);
+  }, [location]);
 
   return (
     <DataContext.Provider
