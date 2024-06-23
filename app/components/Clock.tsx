@@ -4,6 +4,7 @@ import imageSun from '@/public/assets/desktop/icon-sun.svg';
 import imageMoon from '@/public/assets/desktop/icon-moon.svg';
 import { useEffect, useContext } from 'react';
 import { DataContext } from '../_lib/DataContext';
+import { Location } from '../_lib/interfaces';
 
 const DayNightIcon = ({ hours }: { hours: number }) => {
   return hours < 6 || hours >= 18 ? (
@@ -13,8 +14,8 @@ const DayNightIcon = ({ hours }: { hours: number }) => {
   );
 };
 
-export default function Clock() {
-  const { date, location, setDate } = useContext(DataContext);
+export default function Clock({ location }: { location: Location | null }) {
+  const { date, setDate } = useContext(DataContext);
   const city = location?.data.location.city.name;
   const country = location?.data.location.country.alpha2;
 

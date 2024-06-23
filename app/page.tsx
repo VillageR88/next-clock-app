@@ -3,7 +3,7 @@ import imageArrow from '@/public/assets/desktop/icon-arrow-down.svg';
 import Clock from '@/app/components/Clock';
 import Background from './components/Background';
 import Quote from './components/Quote';
-import { getQuote } from '@/app/_lib/functionsServer';
+import { getQuote, getLocationData } from '@/app/_lib/functionsServer';
 
 export default async function Home() {
   const more = 'MORE';
@@ -15,7 +15,7 @@ export default async function Home() {
         <main className="mx-auto my-[60px] flex h-[646px] w-full max-w-[1110px] flex-col justify-between">
           <Quote quote={await getQuote()} />
           <div className="flex items-end justify-between">
-            <Clock />
+            <Clock location={await getLocationData()} />
             <button
               type="button"
               className="group/button flex h-[56px] w-[146px] items-center justify-between rounded-[28px] bg-white pl-[21px] pr-[9px]"
