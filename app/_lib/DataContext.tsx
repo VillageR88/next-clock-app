@@ -13,8 +13,15 @@ export const DataContext = createContext(
 );
 
 export default function DataProvider({ children }: { children: ReactNode }) {
-  const [date, setDate] = useState<Date>(new Date());
   const [location, setLocation] = useState<Location | null>(null);
+  const dateLocation = location?.data.timezone.current_time;
+
+  const [date, setDate] = useState<Date>(new Date(dateLocation ?? Date.now()));
+
+  useEffect(() => {
+    //not certain about fetch lag
+    dateLocation && setDate(new Date(dateLocation));
+  }, [dateLocation]);
 
   useEffect(() => {
     if (location) return;

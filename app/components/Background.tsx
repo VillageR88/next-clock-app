@@ -36,7 +36,6 @@ export default function Background() {
       height={1080}
       src={src}
       alt={alt}
-      quality={100}
     />
   );
 }

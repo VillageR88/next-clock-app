@@ -2,11 +2,23 @@
 import { getQuote } from '@/app/_lib/functionsServer';
 import { useFormState } from 'react-dom';
 import { Quote as tQuote } from '../_lib/interfaces';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Quote({ quote }: { quote: tQuote }) {
+  const quoteWithCounter = quote;
+  quoteWithCounter.counter = 0;
+  const [loadCounter, setLoadCounter] = useState<number>(0);
+  const [state, action] = useFormState<tQuote>(getQuote, quoteWithCounter);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (state.counter > loadCounter) {
+      setLoadCounter(loadCounter + 1);
+      setLoading(false);
+    }
+  }, [loadCounter, state]);
+
   const ButtonRequest = () => {
-    const [loading, setLoading] = useState<boolean>(false);
     return (
       <button
         typeof="button"
@@ -29,11 +41,11 @@ export default function Quote({ quote }: { quote: tQuote }) {
     );
   };
 
-  const [state, action] = useFormState<tQuote>(getQuote, quote);
-
   return (
     <div className="flex max-w-[600px] gap-[20px] drop-shadow-[0_5px_15px_rgba(0,0,0,0.75)]">
-      <section className="flex flex-col gap-[13px] text-pretty">
+      <section
+        className={`flex flex-col gap-[13px] text-justify ${loading ? 'opacity-0' : ''} transition duration-[350ms]`}
+      >
         <p className="text-[18px] leading-[28px] text-white">{state.content}</p>
         <h2 className="text-[18px] font-bold leading-[38px] text-white">{state.author}</h2>
       </section>

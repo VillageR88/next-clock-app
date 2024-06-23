@@ -17,6 +17,7 @@ export default function Clock() {
   const { date, setDate, location } = useContext(DataContext);
   const city = location?.data.location.city.name;
   const country = location?.data.location.country.alpha2;
+  //"current_time": "2024-06-24T09:22:46+02:00",
 
   const bottomText = city && country ? `In ${city}, ${country}`.toUpperCase() : null;
 

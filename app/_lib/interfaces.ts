@@ -111,4 +111,5 @@ export interface Quote {
   length: number;
   dateAdded: string;
   dateModified: string;
+  counter: number;
 }
