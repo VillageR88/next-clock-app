@@ -15,10 +15,12 @@ export default function ButtonMore() {
       onClick={() => {
         setFooterOpen((prev) => !prev);
       }}
-      className={`group/button flex h-[56px] w-[146px] items-center justify-between rounded-[28px] bg-white pl-[21px] pr-[9px] transition duration-500`}
+      className={`group/button flex h-[39px] w-[115px] items-center justify-between rounded-[28px] bg-white pl-[17px] pr-[4px] transition duration-500 md:h-[56px] md:w-[146px] md:pl-[21px] md:pr-[9px]`}
     >
-      <span className={`text-[16px] font-bold tracking-[5px] text-black/50`}>{title}</span>
-      <div className="flex size-[40px] items-center justify-center rounded-full bg-[#303030] transition-colors duration-150 group-hover/button:bg-[#999999]">
+      <span className={`text-[12px] font-bold tracking-[3.75px] text-black/50 md:text-[16px] md:tracking-[5px]`}>
+        {title}
+      </span>
+      <div className="flex size-[32px] items-center justify-center rounded-full bg-[#303030] transition-colors duration-150 group-hover/button:bg-[#999999] md:size-[40px]">
         <Image
           className={`${footerOpen ? '-scale-y-100' : ''} transition duration-200`}
           width={14}

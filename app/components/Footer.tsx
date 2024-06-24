@@ -36,8 +36,8 @@ export default function Footer() {
     if (!description) return null;
     return (
       <section className="flex flex-col">
-        <h2 className="text-[15px] leading-[28px] tracking-[3px]">{title}</h2>
-        <p className="text-[56px] font-bold">{description}</p>
+        <h2 className="text-[13px] leading-[28px] tracking-[2.6px] xl:text-[15px] xl:tracking-[3px]">{title}</h2>
+        <p className="text-[40px] font-bold xl:text-[56px]">{description}</p>
       </section>
     );
   };
@@ -79,8 +79,8 @@ export default function Footer() {
       className={`${footerOpen ? '' : 'translate-y-1/2 scale-y-0 opacity-0'} ${colors} flex size-full max-h-[50vh] items-center justify-center backdrop-blur-md transition duration-[350ms]`}
     >
       <div className="flex w-full max-w-[1110px] px-[64px] xl:px-0">
-        <div className="flex w-full max-w-[844px] justify-between">
-          <div className="flex flex-col gap-y-[42px]">
+        <div className="flex w-full gap-[80px]">
+          <div className="flex flex-col gap-y-[60px] xl:gap-y-[42px]">
             {Object.keys(items1).map((key) => (
               <Block
                 key={key}
@@ -89,8 +89,8 @@ export default function Footer() {
               />
             ))}
           </div>
-          <div className="w-px border-r border-[#303030]"></div>
-          <div className="flex flex-col gap-y-[42px]">
+          <div className="hidden w-px border-r border-[#303030] xl:block xl:pl-[60px]"></div>
+          <div className="flex flex-col gap-y-[60px] xl:gap-y-[42px]">
             {Object.keys(items2).map((key) => (
               <Block
                 key={key}
