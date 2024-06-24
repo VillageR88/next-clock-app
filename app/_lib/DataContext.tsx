@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useRef, useState } from 'react';
 import { Location } from '@/app/_lib/interfaces';
 import { getLocationData } from '@/app/_lib/functionsClient';
 export const DataContext = createContext(
@@ -11,6 +11,7 @@ export const DataContext = createContext(
     setLocation: Dispatch<SetStateAction<Location | null>>;
     footerOpen: boolean;
     setFooterOpen: Dispatch<SetStateAction<boolean>>;
+    divRef: React.RefObject<HTMLDivElement>;
   },
 );
 
@@ -18,8 +19,8 @@ export default function DataProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<Location | null>(null);
   const dateLocation = location?.data.timezone.current_time;
   const [footerOpen, setFooterOpen] = useState<boolean>(false);
-
   const [date, setDate] = useState<Date>(new Date(dateLocation ?? Date.now()));
+  const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     //not certain about fetch lag
@@ -46,6 +47,7 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         setLocation,
         footerOpen,
         setFooterOpen,
+        divRef,
       }}
     >
       {children}

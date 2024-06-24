@@ -3,12 +3,14 @@ import { useContext, useState, useEffect } from 'react';
 import { DataContext } from '@/app/_lib/DataContext';
 
 export default function Footer() {
-  const { footerOpen, location, date } = useContext(DataContext);
+  const { footerOpen, location, date, divRef } = useContext(DataContext);
   const continent = location?.data.location.continent.name;
   const city = location?.data.location.city.name;
   const dayOfTheYear = Math.floor((+date - +new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
   const dayOfTheWeek = date.getDay();
   const weekNumber = Math.floor(dayOfTheYear / 7);
+  const colors =
+    date.getHours() < 6 || date.getHours() >= 18 ? 'bg-[#000000]/50 text-white' : 'bg-[#FFFFFF]/50 text-[#303030]';
 
   const items1 = {
     timezone: {
@@ -31,37 +33,52 @@ export default function Footer() {
     },
   };
   const Block = ({ title, description }: { title: string; description: string }) => {
+    if (!description) return null;
     return (
       <section className="flex flex-col">
-        <h2 className="text-[15px] leading-[28px] tracking-[3px] text-[#303030]">{title}</h2>
+        <h2 className="text-[15px] leading-[28px] tracking-[3px]">{title}</h2>
         <p className="text-[56px] font-bold">{description}</p>
       </section>
     );
   };
   const [calculatedHeight, setCalculatedHeight] = useState<number>(0);
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    let animationFrameId: number;
+
+    const animateHeight = () => {
       setCalculatedHeight((prev) => {
+        let nextHeight = prev;
         if (footerOpen && prev < 400) {
-          return prev + 20;
+          nextHeight = prev + 20;
         } else if (!footerOpen && prev > 0) {
-          return prev - 20;
+          nextHeight = prev - 20;
         }
-        return prev;
+
+        if ((footerOpen && nextHeight >= 400) || (!footerOpen && nextHeight <= 0)) {
+          cancelAnimationFrame(animationFrameId);
+          divRef.current?.classList.remove('no-scrollbar');
+        }
+        return nextHeight;
       });
-    }, 20);
+
+      if ((footerOpen && calculatedHeight < 400) || (!footerOpen && calculatedHeight > 0)) {
+        animationFrameId = requestAnimationFrame(animateHeight);
+        divRef.current?.classList.add('no-scrollbar');
+      }
+    };
+    animationFrameId = requestAnimationFrame(animateHeight);
 
     return () => {
-      clearInterval(intervalId);
+      cancelAnimationFrame(animationFrameId);
     };
-  }, [footerOpen]);
+  }, [calculatedHeight, divRef, footerOpen]);
 
   return (
     <footer
       style={{ minHeight: calculatedHeight }}
-      className={`${footerOpen ? '' : 'translate-y-1/2 scale-y-0'} flex size-full max-h-[50vh] items-center justify-center bg-white/75 transition duration-[600ms]`}
+      className={`${footerOpen ? '' : 'translate-y-1/2 scale-y-0 opacity-0'} ${colors} flex size-full max-h-[50vh] items-center justify-center backdrop-blur-md transition duration-[350ms]`}
     >
-      <div className="flex w-full max-w-[1110px]">
+      <div className="flex w-full max-w-[1110px] px-[64px] xl:px-0">
         <div className="flex w-full max-w-[844px] justify-between">
           <div className="flex flex-col gap-y-[42px]">
             {Object.keys(items1).map((key) => (
