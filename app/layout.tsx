@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
         <meta property="og:image" content={undefined} />
       </head>
-      <body className={`${inter.variable} mx-auto w-full max-w-[90em] overflow-x-clip font-inter`}>
+      <body className={`${inter.variable} mx-auto w-full overflow-x-clip font-inter`}>
         <DataProvider>{children}</DataProvider>
       </body>
     </html>

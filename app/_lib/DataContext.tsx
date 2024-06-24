@@ -9,12 +9,15 @@ export const DataContext = createContext(
     setDate: Dispatch<SetStateAction<Date>>;
     location: Location | null;
     setLocation: Dispatch<SetStateAction<Location | null>>;
+    footerOpen: boolean;
+    setFooterOpen: Dispatch<SetStateAction<boolean>>;
   },
 );
 
 export default function DataProvider({ children }: { children: ReactNode }) {
   const [location, setLocation] = useState<Location | null>(null);
   const dateLocation = location?.data.timezone.current_time;
+  const [footerOpen, setFooterOpen] = useState<boolean>(false);
 
   const [date, setDate] = useState<Date>(new Date(dateLocation ?? Date.now()));
 
@@ -41,6 +44,8 @@ export default function DataProvider({ children }: { children: ReactNode }) {
         setDate,
         location,
         setLocation,
+        footerOpen,
+        setFooterOpen,
       }}
     >
       {children}
