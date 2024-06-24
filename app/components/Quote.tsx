@@ -46,8 +46,10 @@ export default function Quote({ quote }: { quote: tQuote }) {
       <section
         className={`flex flex-col gap-[13px] text-justify ${loading ? 'opacity-0' : ''} transition duration-[350ms]`}
       >
-        <p className="text-[18px] leading-[28px] text-white">{state.content}</p>
-        <h2 className="text-[18px] font-bold leading-[38px] text-white">{state.author}</h2>
+        <p className="text-[12px] leading-[22px] text-white md:text-[18px] md:leading-[30px]">{state.content}</p>
+        <h2 className="text-[12px] font-bold leading-[22px] text-white md:text-[18px] md:leading-[38px]">
+          {state.author}
+        </h2>
       </section>
       <ButtonRequest />
     </div>

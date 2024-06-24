@@ -44,22 +44,22 @@ export default function Clock() {
   };
 
   return (
-    <div className="flex w-fit flex-col">
+    <div className="flex w-fit flex-col items-start">
       <div className="flex items-center gap-[16px]">
         <DayNightIcon hours={date.getHours()} />
-        <span className="text-[18px] leading-[28px] tracking-[3.6px] text-white xl:text-[20px] xl:tracking-[4px]">
+        <span className="text-[15px] leading-[25px] tracking-[3px] text-white md:text-[18px] md:leading-[28px] md:tracking-[3.6px] xl:text-[20px] xl:tracking-[4px]">
           {welcomingText(date)}
         </span>
       </div>
       <div className="flex items-end justify-between gap-[20px] py-[16px]">
-        <h1 className="text-[175px] font-bold leading-[175px] tracking-[-4.38px] text-white xl:text-[200px] xl:leading-[200px] xl:tracking-[-5px]">
+        <h1 className="text-[100px] font-bold leading-[100px] tracking-[-2.5px] text-white md:text-[175px] md:leading-[175px] md:tracking-[-4.38px] xl:text-[200px] xl:leading-[200px] xl:tracking-[-5px]">
           {date.toLocaleTimeString('en-GB', {
             hour: '2-digit',
             minute: '2-digit',
           })}
         </h1>
         {location && (
-          <span className="pb-[28px] text-[32px] font-light leading-[28px] text-white xl:text-[40px]">
+          <span className="pb-[6px] text-[15px] font-light leading-[28px] text-white md:pb-[28px] md:text-[32px] xl:text-[40px]">
             {location.data.timezone.code}
           </span>
         )}
